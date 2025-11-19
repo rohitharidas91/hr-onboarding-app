@@ -12,8 +12,8 @@ export interface Task {
   completionDate: string;
 }
 
-async function getTasks() {
-  const res = await fetch("http://localhost:3000/api/tasks");
+async function getUsers() {
+  const res = await fetch("http://localhost:3000/api/users");
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
@@ -21,15 +21,17 @@ async function getTasks() {
 }
 
 export default async function Dashboard() {
-  const data = await getTasks();
-  console.log(data);
+  
+  const users = await getUsers();
+  console.log(tasks);
+  console.log(users);
 
   return (
     <div className="p-2 flex h-full">
       <div className="w-1/3 h-[calc(100vh-4rem)] border-2 rounded-2xl m-2">
-        <EmployeeList onEmployeeSelect={data} />
+        <EmployeeList onEmployeeSelect={users} />
       </div>
-      <EmployeeDtls employee={data[0]} />
+      <EmployeeDtls employee={null} />
     </div>
   );
 }

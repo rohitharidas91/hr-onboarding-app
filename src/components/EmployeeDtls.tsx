@@ -1,31 +1,42 @@
-'use client'
+"use client";
 import { Avatar, AvatarFallback } from "./ui/avatar";
 import { Task } from "./Task";
 import { taskPhases, Task as TaskType } from "@/lib/data";
 interface EmployeeDtlsProps {
   employee: {
-    id:string;
+    _id: string;
     name: string;
     designation: string;
-    startDate: string;
+    joiningDate: string;
   } | null;
 }
 
-export function EmployeeDtls({ employee }: EmployeeDtlsProps) {
+async function getTasks() {
+  const res = await fetch("http://localhost:3000/api/tasks");
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+  return res.json();
+}
+
+export async function EmployeeDtls({ employee }: EmployeeDtlsProps) {
   const handleStatusChange = (taskId: string, completed: boolean) => {
-    console.log(`Task ${taskId} status: ${completed ? 'completed' : 'incomplete'}`);
+    console.log(
+      `Task ${taskId} status: ${completed ? "completed" : "incomplete"}`
+    );
   };
+
+  const tasks = await getTasks();
 
   const handleEdit = (task: TaskType) => {
     // Handle edit logic
-    console.log('Edit task:', task);
+    console.log("Edit task:", task);
   };
 
   const handleDelete = (taskId: string) => {
     // Handle delete logic
-    console.log('Delete task:', taskId);
+    console.log("Delete task:", taskId);
   };
-
 
   if (!employee) {
     return (
@@ -36,9 +47,9 @@ export function EmployeeDtls({ employee }: EmployeeDtlsProps) {
   }
 
   const initials = employee.name
-    .split(' ')
-    .map(n => n[0])
-    .join('')
+    .split(" ")
+    .map((n) => n[0])
+    .join("")
     .toUpperCase();
 
   return (
@@ -55,10 +66,10 @@ export function EmployeeDtls({ employee }: EmployeeDtlsProps) {
         <div className="flex justify-center-safe border-b pb-2">
           <span className="font-medium mr-1">Joining Date:</span>
           <span>
-            {new Date(employee.startDate).toLocaleDateString('en-US', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric'
+            {new Date(employee.startDate).toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
             })}
           </span>
         </div>
