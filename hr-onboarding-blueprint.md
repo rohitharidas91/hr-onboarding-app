@@ -41,26 +41,26 @@ Build a complete HR onboarding application that tracks employee onboarding journ
 
 ### Milestone 0.2: MongoDB Atlas Account
 - [x] Go to mongodb.com/cloud/atlas
-- [ ] Sign up for free account
-- [ ] Create new organization (e.g., "My Projects")
-- [ ] Create new project (e.g., "HR Onboarding")
-- [ ] Keep tab open - you'll need this in Phase 2
+- [x] Sign up for free account
+- [x] Create new organization (e.g., "My Projects")
+- [x] Create new project (e.g., "HR Onboarding")
+- [x] Keep tab open - you'll need this in Phase 2
 
 ### Milestone 0.3: GitHub Repository
-- [ ] Go to github.com
-- [ ] Click "New Repository"
-- [ ] Name: `hr-onboarding-app`
-- [ ] Description: "Employee onboarding tracking system"
-- [ ] Set to Private
-- [ ] Do NOT initialize with README (we'll do this locally)
-- [ ] Create repository
-- [ ] Copy the repository URL (https://github.com/yourusername/hr-onboarding-app.git)
+- [x] Go to github.com
+- [x] Click "New Repository"
+- [x] Name: `hr-onboarding-app`
+- [x] Description: "Employee onboarding tracking system"
+- [x] Set to Private
+- [x] Do NOT initialize with README (we'll do this locally)
+- [x] Create repository
+- [x] Copy the repository URL (https://github.com/yourusername/hr-onboarding-app.git)
 
 ### Milestone 0.4: Vercel Account
-- [ ] Go to vercel.com
-- [ ] Sign up with GitHub account
-- [ ] Connect GitHub account
-- [ ] Keep tab open - you'll need this in Phase 7
+- [x] Go to vercel.com
+- [x] Sign up with GitHub account
+- [x] Connect GitHub account
+- [x] Keep tab open - you'll need this in Phase 7
 
 **✅ Checkpoint:** You have Node.js, Git, MongoDB account, GitHub repo, and Vercel account ready.
 
@@ -112,9 +112,9 @@ hr-onboarding-app/
 └── README.md
 ```
 
-- [ ] Open `package.json` - see dependencies
-- [ ] Open `src/app/page.js` - this is your home page
-- [ ] Open `src/app/layout.js` - this wraps all pages
+- [x] Open `package.json` - see dependencies
+- [x] Open `src/app/page.js` - this is your home page
+- [x] Open `src/app/layout.js` - this wraps all pages
 
 ### Milestone 1.3: Run Development Server
 In terminal (in VS Code: Terminal → New Terminal):
@@ -123,10 +123,10 @@ In terminal (in VS Code: Terminal → New Terminal):
 npm run dev
 ```
 
-- [ ] Server starts on http://localhost:3000
-- [ ] Open browser to http://localhost:3000
-- [ ] See default Next.js page
-- [ ] Keep server running in this terminal
+- [x] Server starts on http://localhost:3000
+- [x] Open browser to http://localhost:3000
+- [x] See default Next.js page
+- [x] Keep server running in this terminal
 
 **✅ Checkpoint:** Development server running, Next.js welcome page visible.
 
@@ -193,8 +193,8 @@ npm install jsonwebtoken
 npm install next-auth
 ```
 
-- [ ] Wait for installation to complete
-- [ ] Check `package.json` - see new dependencies
+- [x] Wait for installation to complete
+- [x] Check `package.json` - see new dependencies
 
 ### Milestone 1.7: Create Environment Variables File
 
