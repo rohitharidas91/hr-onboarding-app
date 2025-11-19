@@ -29,6 +29,14 @@ const taskSchema = new Schema(
       type: String,
       required: true,
     },
+    phase: {
+      type: Number,
+      required: true,
+    },
+    employeeId: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );

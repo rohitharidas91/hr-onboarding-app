@@ -91,9 +91,8 @@ export const employees = [
 ];
 
 export const tasks: Task[] = [
-    // Pre-Boarding
     {
-        id: 'task-1',
+        id: '1',
         title: 'Send Welcome Package',
         description: 'Email welcome package with company info and first day details',
         employeeId: '1',
@@ -101,12 +100,12 @@ export const tasks: Task[] = [
         startDate: '2023-12-01',
         completionDate: '',
         phase: 1,
-        assignedTo: 'John Doe', // HR Manager
+        assignedTo: 'John Doe',
         createdAt: '2023-11-15T09:00:00Z',
         updatedAt: '2023-11-15T09:00:00Z'
     },
     {
-        id: 'task-2',
+        id: '2',
         title: 'Complete Paperwork',
         description: 'Employment contract and tax forms',
         employeeId: '1',
@@ -114,13 +113,12 @@ export const tasks: Task[] = [
         startDate: '2023-12-01',
         completionDate: '2023-12-11',
         phase: 1,
-        assignedTo: 'John Doe', // HR Manager
+        assignedTo: 'John Doe',
         createdAt: '2023-11-15T09:00:00Z',
         updatedAt: '2023-11-15T09:00:00Z'
     },
-    // Day 1 Orientation
     {
-        id: 'task-3',
+        id: '3',
         title: 'Office Tour',
         description: 'Show new hire around the office',
         employeeId: '1',
@@ -128,9 +126,8 @@ export const tasks: Task[] = [
         startDate: '2023-12-16',
         completionDate: '',
         phase: 2,
-        assignedTo: 'John Doe', // Office Manager
+        assignedTo: 'John Doe',
         createdAt: '2023-11-15T09:00:00Z',
         updatedAt: '2023-11-15T09:00:00Z'
     },
-    // Add more sample tasks for other phases...
 ];

@@ -26,6 +26,10 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    joiningDate: {
+      type: Date,
+      required: true,
+    },
   },
   { timestamps: true }
 );
