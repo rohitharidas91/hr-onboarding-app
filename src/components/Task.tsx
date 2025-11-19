@@ -1,6 +1,6 @@
 "use client";
 import { tasks } from "@/lib/data";
-
+import { useState } from "react";
 import {
   Accordion,
   AccordionContent,
@@ -10,10 +10,14 @@ import {
 import {
   Calendar as CalendarIcon,
   CheckCircle2 as CheckCircle2Icon,
+  Trash,
+  Edit,
   User,
 } from "lucide-react";
 
 import { NewTaskButton } from "./NewTaskButton";
+import { EditTaskButton } from "./EditTaskButton";
+import { Button } from "./ui/button";
 
 export interface TaskPhaseProps {
   phaseId: number;
@@ -22,7 +26,15 @@ export interface TaskPhaseProps {
 }
 
 export function Task({ phaseId, phaseName, employeeId }: TaskPhaseProps) {
-  const phaseTasks = tasks.filter(
+  const [taskList, setTaskList] = useState(tasks);
+
+  function handleDelete(taskId: string) {
+    setTaskList(taskList.filter((task) => task.id !== taskId));
+  }
+
+  function handleEdit(taskId: string) {}
+
+  const phaseTasks = taskList.filter(
     (task) => task.phase === phaseId && task.employeeId === employeeId
   );
 
@@ -38,6 +50,11 @@ export function Task({ phaseId, phaseName, employeeId }: TaskPhaseProps) {
               </h2>
               <p className="text-gray-600">{task.description}</p>
               <div className="flex flex-wrap gap-4 pt-2 text-sm text-gray-500 border-t border-gray-100">
+                <EditTaskButton taskId={task.id} />
+
+                <Button variant="ghost" onClick={() => handleDelete(task.id)}>
+                  <Trash className="text-red-600" />
+                </Button>
                 <div className="flex items-center gap-1">
                   <User className="w-4 h-4 text-gray-400" />
                   <span>Assigned To: {task.assignedTo}</span>

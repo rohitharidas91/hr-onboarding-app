@@ -1,5 +1,5 @@
 import { AccordionContent } from "@/components/ui/accordion";
-import { Dialog, DialogTrigger, DialogContent } from "./ui/dialog";
+import { Dialog, DialogTrigger, DialogContent, DialogTitle } from "./ui/dialog";
 import { Button } from "./ui/button";
 import { useState } from "react";
 import { Plus } from "lucide-react";
@@ -25,6 +25,7 @@ export function NewTaskButton() {
             </Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-[425px]">
+            <DialogTitle>New Task</DialogTitle>
             <TaskForm
               onCancel={() => setIsFormOpen(false)}
               onSubmit={(taskData) => {

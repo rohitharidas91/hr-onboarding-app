@@ -52,9 +52,9 @@ export function EmployeeDtls({ employee }: EmployeeDtlsProps) {
       </div>
 
       <div className="space-y-4">
-        <div className="flex justify-between border-b pb-2">
-          <span className="text-gray-500">Start Date:</span>
-          <span className="font-medium">
+        <div className="flex justify-center-safe border-b pb-2">
+          <span className="font-medium mr-1">Joining Date:</span>
+          <span>
             {new Date(employee.startDate).toLocaleDateString('en-US', {
               year: 'numeric',
               month: 'long',

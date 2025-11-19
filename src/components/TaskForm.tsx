@@ -1,19 +1,13 @@
 "use client";
-import { useState, useEffect } from "react";
 import { Task } from "@/lib/data";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Textarea } from "./ui/textarea";
-import { taskPhases } from "@/lib/data";
 import {
   Card,
-  CardAction,
   CardContent,
-  CardDescription,
   CardFooter,
-  CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
 
 interface TaskFormProps {
@@ -25,10 +19,6 @@ interface TaskFormProps {
 export function TaskForm({ task, onSubmit, onCancel }: TaskFormProps) {
   return (
     <Card>
-      <CardHeader>
-        <CardTitle>New/Edit Task</CardTitle>
-        <CardDescription>Update task details</CardDescription>
-      </CardHeader>
       <CardContent>
         <form>
           <Input
