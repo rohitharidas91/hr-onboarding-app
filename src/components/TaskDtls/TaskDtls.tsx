@@ -1,7 +1,6 @@
 import { taskPhases } from "@/lib/data";
 import { TaskPhase } from "./TaskPhase";
 import { Accordion, AccordionItem, AccordionTrigger } from "../ui/accordion";
-import { Button } from "../ui/button";
 
 type TaskDtlsProps = {
   employeeId: string;
@@ -12,15 +11,10 @@ export function TaskDtls({ employeeId }: TaskDtlsProps) {
     <div key={phase.id}>
       <Accordion type="single" collapsible className="w-full">
         <AccordionItem value={phase.name} className="">
-          <AccordionTrigger className="border-2 mx-2 px-3">
+          <AccordionTrigger className="border mx-2 my-0.5 px-3 bg-accent">
             {phase.name}
           </AccordionTrigger>
-          <TaskPhase
-            phaseId={phase.id}
-            phaseName={phase.name}
-            phaseColor={phase.color}
-            employeeId={employeeId}
-          />
+          <TaskPhase phaseId={phase.id} employeeId={employeeId} />
         </AccordionItem>
       </Accordion>
     </div>

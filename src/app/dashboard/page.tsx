@@ -4,6 +4,7 @@ import { EmployeeDtls } from "@/components/EmployeeDtls/EmployeeDtls";
 import { useEffect, useState } from "react";
 import { TaskDtls } from "@/components/TaskDtls/TaskDtls";
 import { EmployeeType } from "@/lib/types";
+import { Loader2 } from "lucide-react";
 
 export default function Dashboard() {
   const [selectedEmployee, setSelectedEmployee] = useState<EmployeeType | null>(
@@ -34,7 +35,16 @@ export default function Dashboard() {
   }, []);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex items-center justify-center h-[calc(100vh-8rem)] w-full">
+        <div className="flex flex-col items-center space-y-4">
+          <Loader2 className="h-12 w-12 text-blue-500 animate-spin" />
+          <p className="text-lg font-medium text-gray-700">
+            Loading dashboard...
+          </p>
+        </div>
+      </div>
+    );
   }
 
   return (

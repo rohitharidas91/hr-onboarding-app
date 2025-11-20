@@ -17,10 +17,21 @@ export const PUT = async (request, { params }) => {
   const { id } = await params;
   try {
     await connect();
-    const task = await Task.findByIdAndUpdate(id, request.body);
+    const body = await request.json();
+    const task = await Task.findByIdAndUpdate(
+      id,
+      { $set: body },
+      { new: true }
+    );
+    if (!task) {
+      return NextResponse.json({ error: "Task not found" }, { status: 404 });
+    }
     return NextResponse.json(task);
   } catch (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json(
+      { error: error.message || "Internal Server Error" },
+      { status: 500 }
+    );
   }
 };
 
