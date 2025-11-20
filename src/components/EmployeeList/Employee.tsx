@@ -1,26 +1,37 @@
+"use client";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { cn } from "@/lib/utils";
 
 interface EmployeeProps {
+  id: string;
   name: string;
   designation: string;
-  onClick?: () => void;  // Add this line
+  email: string;
+  joiningDate: string;
+  isSelected?: boolean;
+  onClick?: () => void;
 }
 
 export function Employee({
   name = "",
   designation = "",
-  onClick
+  isSelected = false,
+  onClick,
 }: EmployeeProps) {
   const initials = name
-    .split(' ')
-    .map(n => n[0])
-    .join('')
+    .split(" ")
+    .map((n) => n[0])
+    .join("")
     .toUpperCase();
 
   return (
     <div
-      className={`flex items-center space-x-4 p-3 hover:bg-gray-50 rounded-lg transition-colors`}
-      onClick={onClick}>
+      className={cn(
+        "flex items-center space-x-4 p-3 rounded-lg transition-colors cursor-pointer",
+        isSelected ? "bg-blue-50 border border-blue-200" : "hover:bg-gray-50"
+      )}
+      onClick={onClick}
+    >
       <Avatar className="h-10 w-10">
         <AvatarImage src="" alt={name} />
         <AvatarFallback className="bg-blue-100 text-blue-800">

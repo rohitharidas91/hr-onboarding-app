@@ -1,37 +1,61 @@
-import { EmployeeList } from "@/components/EmployeeList";
-import { EmployeeDtls } from "@/components/EmployeeDtls";
-import { EmployeeType } from "@/components/EmployeeList";
+"use client";
+import { EmployeeList } from "@/components/EmployeeList/EmployeeList";
+import { EmployeeDtls } from "@/components/EmployeeDtls/EmployeeDtls";
+import { useEffect, useState } from "react";
+import { TaskDtls } from "@/components/TaskDtls/TaskDtls";
+import { EmployeeType } from "@/lib/types";
 
-export interface Task {
-  id: string;
-  title: string;
-  description: string;
-  assignedTo: string;
-  dueDate: string;
-  startDate: string;
-  completionDate: string;
-}
+export default function Dashboard() {
+  const [selectedEmployee, setSelectedEmployee] = useState<EmployeeType | null>(
+    null
+  );
+  const [employees, setEmployees] = useState<EmployeeType[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-async function getUsers() {
-  const res = await fetch("http://localhost:3000/api/users");
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const res = await fetch("/api/users", {
+          next: { revalidate: 5 },
+        });
+        if (!res.ok) {
+          throw new Error("Failed to fetch data");
+        }
+        const data = await res.json();
+        setEmployees(data);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchUsers();
+  }, []);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
   }
-  return res.json();
-}
-
-export default async function Dashboard() {
-  
-  const users = await getUsers();
-  console.log(tasks);
-  console.log(users);
 
   return (
-    <div className="p-2 flex h-full">
-      <div className="w-1/3 h-[calc(100vh-4rem)] border-2 rounded-2xl m-2">
-        <EmployeeList onEmployeeSelect={users} />
+    <div className="p-2 flex h-full w-full">
+      <div className="w-1/3 h-[calc(100vh-8rem)] border-2 rounded-2xl m-2 overflow-hidden">
+        <EmployeeList
+          selectedEmployee={selectedEmployee}
+          setSelectedEmployee={setSelectedEmployee}
+          employees={employees}
+        />
       </div>
-      <EmployeeDtls employee={null} />
+      <div className="w-2/3 h-[calc(100vh-8rem)] border-2 rounded-2xl m-2 overflow-hidden">
+        <EmployeeDtls
+          _id={selectedEmployee?._id || ""}
+          email={selectedEmployee?.email || ""}
+          name={selectedEmployee?.name || ""}
+          designation={selectedEmployee?.designation || ""}
+          joiningDate={selectedEmployee?.joiningDate}
+        />
+        <TaskDtls employeeId={selectedEmployee?._id || ""} />
+      </div>
     </div>
   );
 }
