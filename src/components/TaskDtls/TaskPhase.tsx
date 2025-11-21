@@ -61,8 +61,14 @@ export function TaskPhase({ phaseId, employeeId }: TaskPhaseProps) {
                 )}
               </div>
               <div className="flex items-center space-x-2">
-                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                  {task.assignedTo || "Not Assigned"}
+                <span
+                  className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                    task.assignedTo === "Unassigned"
+                      ? "bg-red-100 text-red-800"
+                      : "bg-blue-100 text-blue-800"
+                  }`}
+                >
+                  {task.assignedTo || "Unassigned"}
                 </span>
               </div>
             </div>
@@ -122,7 +128,6 @@ export function TaskPhase({ phaseId, employeeId }: TaskPhaseProps) {
                 </div>
                 <div className="flex items-center justify-evenly">
                   <EditTask task={task} mutate={mutate} />
-                  
                 </div>
               </div>
             </div>

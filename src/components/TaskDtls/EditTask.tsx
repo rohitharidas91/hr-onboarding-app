@@ -61,7 +61,7 @@ export function EditTask({
   return (
     <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
       <PopoverTrigger asChild>
-        <Button>
+        <Button onClick={(e) => e.stopPropagation()}>
           <Edit />
         </Button>
       </PopoverTrigger>
