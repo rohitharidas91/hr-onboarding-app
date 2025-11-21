@@ -20,8 +20,8 @@ import {
 import { hods } from "@/lib/data";
 import { TaskType } from "@/lib/types";
 
-const handleEdit = async (task: TaskType) => {
-    try {
+const handleEdit = async (task: TaskType, mutate: () => void) => {
+  try {
     const response = await fetch(`/api/tasks/${task._id}`, {
       method: "PUT",
       headers: {
@@ -41,6 +41,7 @@ const handleEdit = async (task: TaskType) => {
 
     const updatedTask = await response.json();
     console.log("Task updated successfully:", updatedTask);
+    mutate();
     return updatedTask;
   } catch (error) {
     console.error("Error updating task:", error);
@@ -48,10 +49,17 @@ const handleEdit = async (task: TaskType) => {
   }
 };
 
-export function EditTask({ task }: { task: TaskType }) {
+export function EditTask({
+  task,
+  mutate,
+}: {
+  task: TaskType;
+  mutate: () => void;
+}) {
   const [updatedTask, setUpdatedTask] = useState(task);
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   return (
-    <Popover>
+    <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
       <PopoverTrigger asChild>
         <Button>
           <Edit />
@@ -123,7 +131,14 @@ export function EditTask({ task }: { task: TaskType }) {
             }
           />
           <div className="py-2">
-            <Button onClick={() => handleEdit(updatedTask)}>Update</Button>
+            <Button
+              onClick={() => {
+                handleEdit(updatedTask, mutate);
+                setIsPopoverOpen(false);
+              }}
+            >
+              Update
+            </Button>
           </div>
         </div>
       </PopoverContent>

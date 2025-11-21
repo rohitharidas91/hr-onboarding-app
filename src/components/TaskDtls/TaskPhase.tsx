@@ -1,7 +1,6 @@
 "use client";
 import { AccordionContent } from "@/components/ui/accordion";
 import { TaskType } from "@/lib/types";
-import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import {
   CalendarDays,
@@ -12,52 +11,29 @@ import {
 import { Spinner } from "../ui/spinner";
 import { EditTask } from "./EditTask";
 import { DeleteTask } from "./DeleteTask";
+import useSWR from "swr";
 
 interface TaskPhaseProps {
   phaseId: number;
   employeeId: string;
 }
 
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
+
 export function TaskPhase({ phaseId, employeeId }: TaskPhaseProps) {
-  const [tasks, setTasks] = useState<TaskType[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  console.log("TaskPhase props", { phaseId, employeeId });
+  const {
+    data: tasks,
+    error,
+    isLoading,
+    mutate,
+  } = useSWR<TaskType[]>(
+    employeeId
+      ? `/api/tasks?phase=${phaseId}&employeeId=${employeeId}`
+      : null,
+    fetcher
+  );
 
-  useEffect(() => {
-    const fetchTasks = async () => {
-      try {
-        const params = new URLSearchParams();
-        setIsLoading(true);
-        if (!employeeId) {
-          setTasks([]);
-          setIsLoading(false);
-          return;
-        }
-
-        params.set("phase", String(phaseId));
-        params.set("employeeId", employeeId);
-
-        const res = await fetch(`/api/tasks?${params.toString()}`, {
-          next: { revalidate: 5 },
-        });
-
-        if (!res.ok) {
-          throw new Error("Failed to fetch data");
-        }
-
-        const data: TaskType[] = await res.json();
-        setTasks(data);
-      } catch (error) {
-        console.error("Error fetching tasks:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchTasks();
-  }, [phaseId, employeeId]);
-
-  if (!tasks.length && isLoading) {
+  if (isLoading) {
     return (
       <AccordionContent className="text-gray-400 px-6 pb-1">
         <Spinner />
@@ -66,9 +42,17 @@ export function TaskPhase({ phaseId, employeeId }: TaskPhaseProps) {
     );
   }
 
+  if (error) {
+    return (
+      <AccordionContent className="text-gray-400 px-6 pb-1">
+        <p>Error loading tasks.</p>
+      </AccordionContent>
+    );
+  }
+
   return (
     <>
-      {tasks.map((task) => (
+      {tasks?.map((task) => (
         <AccordionContent key={task._id} className="px-2 pb-1">
           <div className="p-4 rounded-lg border border-gray-200 bg-white shadow-sm hover:shadow-md transition-shadow">
             <div className="flex items-start justify-between">
@@ -139,15 +123,15 @@ export function TaskPhase({ phaseId, employeeId }: TaskPhaseProps) {
                   )}
                 </div>
                 <div className="flex items-center justify-evenly">
-                  <EditTask task={task} />
-                  <DeleteTask taskId={task._id} />
+                  <EditTask task={task} mutate={mutate} />
+                  <DeleteTask taskId={task._id} mutate={mutate} />
                 </div>
               </div>
             </div>
           </div>
         </AccordionContent>
       ))}
-      {!tasks.length && !isLoading && (
+      {!tasks?.length && !isLoading && (
         <AccordionContent className="text-gray-400 px-6 pb-1">
           <p>No tasks for this phase.</p>
         </AccordionContent>
