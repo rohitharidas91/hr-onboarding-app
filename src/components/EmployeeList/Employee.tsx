@@ -1,6 +1,7 @@
 "use client";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
+import { Progress } from "@/components/ui/progress";
 
 interface EmployeeProps {
   id: string;
@@ -41,6 +42,10 @@ export function Employee({
       <div className="flex-1 min-w-0">
         <p className="font-medium text-gray-900 truncate">{name}</p>
         <p className="text-sm text-gray-500 truncate">{designation}</p>
+        <div className="flex items-center">
+          <span className="pr-5">Completion%</span>
+          <Progress value={80} />
+        </div>
       </div>
     </div>
   );

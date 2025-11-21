@@ -28,3 +28,18 @@ export const GET = async (request) => {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 };
+
+export const POST = async (request) => {
+  const body = await request.json();
+  const newTask = new Task(body);
+
+  try {
+    await connect();
+    await newTask.save();
+    return new NextResponse(JSON.stringify(newTask), { status: 201 });
+  } catch (err) {
+    return new NextResponse(err.message, {
+      status: 500,
+    });
+  }
+};

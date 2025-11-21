@@ -12,6 +12,7 @@ import { Spinner } from "../ui/spinner";
 import { EditTask } from "./Buttons/EditTask";
 import { DeleteTask } from "./Buttons/DeleteTask";
 import useSWR from "swr";
+import { NewTask } from "./Buttons/NewTask";
 
 interface TaskPhaseProps {
   phaseId: number;
@@ -141,10 +142,11 @@ export function TaskPhase({ phaseId, employeeId }: TaskPhaseProps) {
         </AccordionContent>
       )}
       <AccordionContent className="px-2 pb-1">
-        <Button variant="outline" className="bg-green-600 text-white">
-          <CirclePlus />
-          New Task
-        </Button>
+        <NewTask
+          employeeId={employeeId}
+          phaseId={phaseId}
+          onTaskCreated={mutate}
+        />
       </AccordionContent>
     </>
   );
