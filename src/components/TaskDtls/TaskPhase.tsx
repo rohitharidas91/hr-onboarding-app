@@ -27,9 +27,7 @@ export function TaskPhase({ phaseId, employeeId }: TaskPhaseProps) {
     isLoading,
     mutate,
   } = useSWR<TaskType[]>(
-    employeeId
-      ? `/api/tasks?phase=${phaseId}&employeeId=${employeeId}`
-      : null,
+    employeeId ? `/api/tasks?phase=${phaseId}&employeeId=${employeeId}` : null,
     fetcher
   );
 
@@ -124,7 +122,7 @@ export function TaskPhase({ phaseId, employeeId }: TaskPhaseProps) {
                 </div>
                 <div className="flex items-center justify-evenly">
                   <EditTask task={task} mutate={mutate} />
-                  <DeleteTask taskId={task._id} mutate={mutate} />
+                  
                 </div>
               </div>
             </div>
