@@ -1,7 +1,7 @@
 "use client";
 import { AccordionContent } from "@/components/ui/accordion";
 import { TaskType } from "@/lib/types";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import {
   CalendarDays,
   CalendarCheck,
@@ -128,6 +128,7 @@ export function TaskPhase({ phaseId, employeeId }: TaskPhaseProps) {
                 </div>
                 <div className="flex items-center justify-evenly">
                   <EditTask task={task} mutate={mutate} />
+                  <DeleteTask taskId={task._id} mutate={mutate} />
                 </div>
               </div>
             </div>
