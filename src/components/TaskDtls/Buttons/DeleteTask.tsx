@@ -1,5 +1,5 @@
 import { TrashIcon } from "lucide-react";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 import { toast } from "sonner";
 
 interface DeleteTaskProps {

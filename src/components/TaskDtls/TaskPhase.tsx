@@ -9,8 +9,8 @@ import {
   CirclePlus,
 } from "lucide-react";
 import { Spinner } from "../ui/spinner";
-import { EditTask } from "./EditTask";
-import { DeleteTask } from "./DeleteTask";
+import { EditTask } from "./Buttons/EditTask";
+import { DeleteTask } from "./Buttons/DeleteTask";
 import useSWR from "swr";
 
 interface TaskPhaseProps {
